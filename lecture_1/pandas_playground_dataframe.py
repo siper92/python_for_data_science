@@ -1,4 +1,5 @@
 import numpy as np
+import os
 import pandas as pd
 
 '''
@@ -18,7 +19,7 @@ constructor:
 2) The associating list will be the values within that column.
 '''
 # Change False to True to see Dataframes in action
-if True:
+if False:
     data = {'year': [2010, 2011, 2012, 2011, 2012, 2010, 2011, 2012],
             'team': ['Bears', 'Bears', 'Bears', 'Packers', 'Packers', 'Lions',
                      'Lions', 'Lions'],
@@ -37,7 +38,7 @@ information about your data frame. Some of these functions are:
 4) tail: displays the last five rows of the dataset
 '''
 # Change False to True to see these functions in action
-if True:
+if False:
     data = {'year': [2010, 2011, 2012, 2011, 2012, 2010, 2011, 2012],
             'team': ['Bears', 'Bears', 'Bears', 'Packers', 'Packers', 'Lions',
                      'Lions', 'Lions'],
@@ -51,3 +52,26 @@ if True:
     print(football.head())
     print("")
     print(football.tail())
+
+if True:
+    data = {'year': [2010, 2011, 2012, 2011, 2012, 2010, 2011, 2012],
+            'team': ['Bears', 'Bears', 'Bears', 'Packers', 'Packers', 'Lions', 'Lions', 'Lions'],
+            'wins': [11, 8, 10, 15, 11, 6, 10, 4],
+            'losses': [5, 8, 6, 1, 5, 10, 6, 12]}
+    football = pd.DataFrame(data, columns=['year', 'team', 'wins', 'losses'])
+    print(football)
+
+    script_path = os.path.dirname(os.path.realpath(__file__))
+    svn_dir_path = "{base_path}{sep}dataset{sep}".format(base_path=script_path, sep=os.sep);
+    from_csv = pd.read_csv(svn_dir_path+'mariano-rivera.csv')
+
+    print(from_csv.head())
+
+    cols = ['num', 'game', 'date', 'team', 'home_away', 'opponent',
+            'result', 'quarter', 'distance', 'receiver', 'score_before',
+            'score_after']
+    no_headers = pd.read_csv(svn_dir_path+'peyton-passing-TDs-2012.csv', sep=',', header=None,
+                             names=cols)
+    print(no_headers.head())
+
+    football.to_excel(svn_dir_path+'football.xlsx', index=False)
